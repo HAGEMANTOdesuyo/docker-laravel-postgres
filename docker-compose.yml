@@ -1,0 +1,56 @@
+version: '3.3'
+services:
+  app1:
+    container_name: apache-php
+    build:
+      context: ./docker/apache-php
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      #- ./html:/var/www/html
+      - ./app:/var/www/app
+    working_dir: /var/www/app
+    ports:
+      - 8080:80
+    restart: always
+
+  app2:
+    container_name: phppgadmin
+    image: dpage/pgadmin4:4.2
+    #build:
+      #context: ./docker/phpmyadmin
+      #dockerfile: Dockerfile
+    tty: true
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin
+    volumes:
+      - ./docker/phppgadmin/:/var/lib/pgadmin
+    #links:
+      #- db
+    ports:
+      - 4040:80
+      - 443:443
+    restart: always
+    depends_on:
+      - db
+      #- postgres
+
+  db:
+    container_name: postgres
+    image: postgres:12.3
+    #build:
+      #context: ./docker/mysql
+      #dockerfile: Dockerfile
+    environment:
+      - POSTGRES_DB=sampledb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      # 設定ファイル
+      - ./docker/postgres/initdb.d:/docker-entrypoint-initdb.d
+      # データベースのデータ
+      #- ./docker/mysql/data:/var/lib/mysql
+    ports:
+      - 15432:5432
+    restart: always
