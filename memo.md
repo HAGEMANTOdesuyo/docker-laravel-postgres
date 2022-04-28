@@ -28,3 +28,10 @@ npm install -D vue-template-compiler
 - vueを使う
   - vueコンポーネントを作る
   - resources/js/app.jsの編集
+
+- db接続テスト
+```
+php artisan tinker
+DB::connection()->getConfig();
+DB::connection()->getPdo();
+```
