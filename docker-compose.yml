@@ -9,7 +9,7 @@ services:
     volumes:
       #- ./html:/var/www/html
       - ./app:/var/www/app
-    working_dir: /var/www/app
+    working_dir: /var/www/app/laravel-test
     ports:
       - 8080:80
       - 8000:8000
