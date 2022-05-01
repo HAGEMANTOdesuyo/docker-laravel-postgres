@@ -1,0 +1,11 @@
+ id 
+ date 
+ customer_id 
+ interviewer_name 
+ reporter_user_id 
+ contents 
+ comment 
+ deleted_at 
+ created_at 
+ updated_at 
+ customer_name_input 
