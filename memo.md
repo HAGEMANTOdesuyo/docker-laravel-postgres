@@ -34,3 +34,4 @@ DB::connection()->getPdo();
 ```
 php artisan make:migration filename
 ```
+- test
