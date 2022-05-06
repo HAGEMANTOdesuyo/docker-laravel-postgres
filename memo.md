@@ -34,4 +34,7 @@ DB::connection()->getPdo();
 ```
 php artisan make:migration filename
 ```
-- test
+- Model作成
+```
+php artisan make:model Eloquents/<modelname>
+```
