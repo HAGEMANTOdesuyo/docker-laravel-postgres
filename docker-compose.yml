@@ -13,7 +13,7 @@ services:
     ports:
       - 8080:80
       - 8000:8000
-    restart: always
+      #restart: always
 
   web2:
     container_name: phppgadmin
