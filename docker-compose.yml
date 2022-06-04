@@ -3,13 +3,11 @@ services:
   web1:
     container_name: web
     build:
-      context: ./docker/web
+      context: ./web
       dockerfile: Dockerfile
-    tty: true
-    volumes:
-      #- ./html:/var/www/html
-      - ./app:/var/www/app
-    working_dir: /var/www/app/laravel-test
+    #tty: true
+      - ../app:/var/www/app
+    working_dir: /var/www/app/todoapp_test
     ports:
       - 8080:80
       - 8000:8000
@@ -26,7 +24,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=pgadmin
       - PGADMIN_DEFAULT_PASSWORD=pgadmin
     volumes:
-      - ./docker/phppgadmin/:/var/lib/pgadmin
+      - ./phppgadmin/:/var/lib/pgadmin
     #links:
       #- db
     ports:
