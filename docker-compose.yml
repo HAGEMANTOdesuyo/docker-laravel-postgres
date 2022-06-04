@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile
     #tty: true
     volumes:
-      - ../app:/var/www/app
-    working_dir: /var/www/app/todoapp
+      - ../src:/var/www
+    working_dir: /var/www/todoapp
     ports:
       - 8080:80
       - 8000:8000
