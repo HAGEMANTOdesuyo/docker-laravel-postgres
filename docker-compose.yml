@@ -1,42 +1,21 @@
 version: '3.3'
 services:
-  web1:
-    container_name: web
+  web:
+    container_name: todoapp_web
     build:
       context: ./web
       dockerfile: Dockerfile
     #tty: true
+    volumes:
       - ../app:/var/www/app
-    working_dir: /var/www/app/todoapp_test
+    working_dir: /var/www/app/todoapp
     ports:
       - 8080:80
       - 8000:8000
       #restart: always
 
-  web2:
-    container_name: phppgadmin
-    image: dpage/pgadmin4:4.2
-    #build:
-      #context: ./docker/phpmyadmin
-      #dockerfile: Dockerfile
-    tty: true
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=pgadmin
-      - PGADMIN_DEFAULT_PASSWORD=pgadmin
-    volumes:
-      - ./phppgadmin/:/var/lib/pgadmin
-    #links:
-      #- db
-    ports:
-      - 4040:80
-      - 443:443
-    restart: always
-    depends_on:
-      - db
-      #- postgres
-
   db:
-    container_name: postgres
+    container_name: todoapp_postgres
     image: postgres:12.3
     #build:
       #context: ./docker/mysql
@@ -47,9 +26,9 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       # 設定ファイル
-      - ./docker/postgres/initdb.d:/docker-entrypoint-initdb.d
+      - ./postgres/initdb.d:/docker-entrypoint-initdb.d
       # データベースのデータ
-      #- ./docker/mysql/data:/var/lib/mysql
+      - ./postgres/data:/var/lib/postgresql/data
     ports:
       - 15432:5432
-    restart: always
+    #restart: always
